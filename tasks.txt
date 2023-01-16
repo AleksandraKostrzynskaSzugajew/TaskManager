@@ -1,2 +1,1 @@
-ola, a, a
-zuza, aaa, 3
+ee, 2222-11-11, true
