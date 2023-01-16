@@ -12,7 +12,7 @@ public class TaskManager {
     public static void main(String[] args) {
 
         run();
-        // TODO: 16.01.2023 walidacja importance, walidacja numeru w menu
+        // TODO: 16.01.2023 walidacja importance, walidacja numeru w menu, remove!!!
 
     }
 
@@ -110,6 +110,7 @@ public class TaskManager {
         return date;
     }
 
+    //nie dziala w ogole
     public static String validateImportance() {
 
         boolean flag = true;
@@ -120,7 +121,8 @@ public class TaskManager {
             if ("true".trim().equalsIgnoreCase(importance) || "false".trim().equalsIgnoreCase(importance)) {
                 System.out.println("type \"true\" or \"false\"");
 
-            }flag = false;
+            }
+            flag = false;
         }
 
         return importance;
@@ -177,21 +179,22 @@ public class TaskManager {
     public static void removeTask() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("please, type position to be removed");
-        int number = -1;
-        try {
-            number = scanner.nextInt();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Your task-list does not contain such position");
-        } catch (InputMismatchException e) {
-            e.printStackTrace();
-            String msg = e.getMessage();
-            System.out.println(msg);
-        }
+        //int number = -1;
+       // try {
+           int number = scanner.nextInt();
+//        } catch (IndexOutOfBoundsException e) {
+//            System.out.println("Your task-list does not contain such position");
+//        } catch (InputMismatchException e) {
+//            System.out.println("Invalid input, try again");
+//        }
 
         //Read from the original file and write to the new
         //unless content matches data to be removed.
         File file = new File("tasks.txt");
+        File fileCopy = new File("taskCopy.txt");
 
+
+        StringBuilder sb = new StringBuilder();
         try {
             Scanner scanner1 = new Scanner(file);
             while (scanner1.hasNextLine()) {
@@ -205,15 +208,15 @@ public class TaskManager {
                 }
             }
 
-            if (!file.delete()) {
-                System.out.println("Could not delete file");
-                return;
-            }
-
-            Path from = Paths.get("taskCopy.txt");
-            Path to = Paths.get("tasks.txt");
-
-            Files.move(from, to);
+//            if (!file.delete()) {
+//                System.out.println("Could not delete file");
+//                return;
+//            }
+//
+//            Path from = Paths.get("taskCopy.txt");
+//            Path to = Paths.get("tasks.txt");
+//
+//            Files.move(from, to);
 
         } catch (FileNotFoundException e) {
             System.out.println("No such file found");
