@@ -1,4 +1,3 @@
 adam, 1993-11-12, true
-ola, 1993-04-28, true
 teresa, 1966-01-14, true
 robert, 1965-05-15, true

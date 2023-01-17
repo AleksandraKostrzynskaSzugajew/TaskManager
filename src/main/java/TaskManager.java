@@ -179,44 +179,45 @@ public class TaskManager {
     public static void removeTask() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("please, type position to be removed");
-        //int number = -1;
-       // try {
-           int number = scanner.nextInt();
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("Your task-list does not contain such position");
-//        } catch (InputMismatchException e) {
-//            System.out.println("Invalid input, try again");
-//        }
+        int number = -1;
+        try {
+            number = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input, try again");
+        }
 
         //Read from the original file and write to the new
         //unless content matches data to be removed.
         File file = new File("tasks.txt");
-        File fileCopy = new File("taskCopy.txt");
-
-
         StringBuilder sb = new StringBuilder();
+
+        int count = 0;
         try {
             Scanner scanner1 = new Scanner(file);
-            while (scanner1.hasNextLine()) {
+
+            while ((scanner1.hasNextLine())) {
+                count++;
                 String line = scanner1.nextLine();
-                if (!line.startsWith(Integer.toString(number))) {
+                if (number != count && line!=null) {
                     try (PrintWriter printWriter = new PrintWriter("taskCopy.txt")) {
-                        printWriter.println(line);
+                        String line1 = sb.append(line + "\n").toString().trim();
+                        printWriter.println(line1);
                     } catch (FileNotFoundException ex) {
                         System.out.println("Exception while writing");
                     }
                 }
             }
+//
 
-//            if (!file.delete()) {
-//                System.out.println("Could not delete file");
-//                return;
-//            }
-//
-//            Path from = Paths.get("taskCopy.txt");
-//            Path to = Paths.get("tasks.txt");
-//
-//            Files.move(from, to);
+            if (!file.delete()) {
+                System.out.println("Could not delete file");
+                return;
+            }
+
+            Path from = Paths.get("taskCopy.txt");
+            Path to = Paths.get("tasks.txt");
+
+            Files.move(from, to);
 
         } catch (FileNotFoundException e) {
             System.out.println("No such file found");
