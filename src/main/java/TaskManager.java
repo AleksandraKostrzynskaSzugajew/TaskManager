@@ -19,16 +19,12 @@ public class TaskManager {
     public static void run() {
 
         boolean quit = false;
-        int choice = 0;
+        int choice;
         printMenu();
 
         while (!quit) {
             System.out.println("What would you like to do? (press 4 to print options)");
-            Scanner scanner = new Scanner(System.in);
-            choice = scanner.nextInt();
-            scanner.nextLine();
-
-            
+            choice = validateChoice();
 
             switch (choice) {
                 case 1:
@@ -49,8 +45,25 @@ public class TaskManager {
                     break;
             }
         }
-
     }
+
+    public static int validateChoice() {
+        boolean flag = true;
+        int choice = -1;
+        while (flag) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                choice = scanner.nextInt();
+                if (choice < 1 || choice > 5) {
+                    System.out.println("Please, pick the value from 1 to 5");
+                } else flag = false;
+            } catch (InputMismatchException e) {
+                System.out.println("Input must be numeric value, try picking again");
+            }
+        }
+        return choice;
+    }
+
 
     public static String validateDescription() {
         boolean flagDescription = true;
