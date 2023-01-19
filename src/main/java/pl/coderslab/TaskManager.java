@@ -1,10 +1,11 @@
+package pl.coderslab;
+
 import org.apache.commons.validator.GenericValidator;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.util.*;
 
 public class TaskManager {
@@ -12,7 +13,6 @@ public class TaskManager {
     public static void main(String[] args) {
 
         run();
-        // TODO: 16.01.2023 walidacja importance, walidacja numeru w menu
 
     }
 
@@ -130,17 +130,22 @@ public class TaskManager {
 
         boolean flag = true;
         String importance = "";
+        String result = "";
+        String isFalse = "false";
+        String isTrue = "true";
         while (flag) {
             Scanner scanner = new Scanner(System.in);
             importance = scanner.nextLine();
-            if ("true".trim().equalsIgnoreCase(importance) || "false".trim().equalsIgnoreCase(importance)) {
+            if (importance.trim().equalsIgnoreCase(isTrue) || importance.trim().equalsIgnoreCase(isFalse)) {
+                result = importance;
+                flag = false;
+            } else {
+                flag = true;
                 System.out.println("type \"true\" or \"false\"");
-
             }
-            flag = false;
         }
 
-        return importance;
+        return result;
     }
 
 
