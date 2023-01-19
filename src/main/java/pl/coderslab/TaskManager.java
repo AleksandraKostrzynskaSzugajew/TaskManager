@@ -18,12 +18,22 @@ public class TaskManager {
 
     public static void run() {
 
+        System.out.println("       WELCOME TO TASK MANAGER");
+        System.out.println("Thank you for choosing this application");
+        System.out.println("");
+        System.out.println(ConsoleColors.GREEN_BOLD_BRIGHT + "           Happy planning!");
+        System.out.println("++____________________________________++");
+        System.out.println("");
+        System.out.print(ConsoleColors.RESET);
+
+
         boolean quit = false;
         int choice;
         printMenu();
 
         while (!quit) {
-            System.out.println("What would you like to do? (press 4 to print options)");
+            System.out.println(ConsoleColors.CYAN_BOLD_BRIGHT + "What would you like to do? (press 4 to print options)");
+            System.out.print(ConsoleColors.RESET);
             choice = validateChoice();
 
             switch (choice) {
@@ -40,7 +50,7 @@ public class TaskManager {
                     printMenu();
                     break;
                 case 5:
-                    System.out.println("Bye, bye!");
+                    System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT + "Bye, bye!");
                     quit = true;
                     break;
             }
@@ -125,7 +135,6 @@ public class TaskManager {
         return date;
     }
 
-    //nie dziala w ogole
     public static String validateImportance() {
 
         boolean flag = true;
@@ -144,7 +153,6 @@ public class TaskManager {
                 System.out.println("type \"true\" or \"false\"");
             }
         }
-
         return result;
     }
 
@@ -170,6 +178,8 @@ public class TaskManager {
     }
 
     public static String[] listTasks() {
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "LIST OF TASKS");
+        System.out.print(ConsoleColors.RESET);
         int count = 0;
         ArrayList<String> listOfStrings = new ArrayList<>();
         File file = new File("tasks.txt");
@@ -212,8 +222,6 @@ public class TaskManager {
             }
         }
 
-        //Read from the original file and write to the new
-        //unless content matches data to be removed.
         File file = new File("tasks.txt");
         StringBuilder sb = new StringBuilder();
 
@@ -256,13 +264,13 @@ public class TaskManager {
                 IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public static void printMenu() {
 
 
-        System.out.println("Options to choose : ");
+        System.out.println(ConsoleColors.WHITE_BOLD + "Options to choose : ");
+        System.out.print(ConsoleColors.RESET);
         System.out.println("1 - add new task");
         System.out.println("2 - remove task ");
         System.out.println("3 - list my tasks ");
