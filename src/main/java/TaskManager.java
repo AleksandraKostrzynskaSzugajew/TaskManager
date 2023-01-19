@@ -12,7 +12,7 @@ public class TaskManager {
     public static void main(String[] args) {
 
         run();
-        // TODO: 16.01.2023 walidacja importance, walidacja numeru w menu, remove!!!
+        // TODO: 16.01.2023 walidacja importance, walidacja numeru w menu
 
     }
 
@@ -27,6 +27,8 @@ public class TaskManager {
             Scanner scanner = new Scanner(System.in);
             choice = scanner.nextInt();
             scanner.nextLine();
+
+            
 
             switch (choice) {
                 case 1:
@@ -177,13 +179,19 @@ public class TaskManager {
     }
 
     public static void removeTask() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("please, type position to be removed");
+
         int number = -1;
-        try {
-            number = scanner.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input, try again");
+        boolean flag = true;
+
+        while (flag) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Please, type the position to be removed");
+            try {
+                number = scanner.nextInt();
+                flag = false;
+            } catch (InputMismatchException e) {
+                System.out.println("Expected value is a number");
+            }
         }
 
         //Read from the original file and write to the new
@@ -198,16 +206,20 @@ public class TaskManager {
             while ((scanner1.hasNextLine())) {
                 count++;
                 String line = scanner1.nextLine();
-                if (number != count && line!=null) {
+                if (number != count && line != null) {
                     try (PrintWriter printWriter = new PrintWriter("taskCopy.txt")) {
                         String line1 = sb.append(line + "\n").toString().trim();
                         printWriter.println(line1);
+                        if (number < 1 || number > count) {
+                            System.out.println("Your list does not contain position " + number);
+                            //for some reason prints itself twice?? To manage.
+                        }
                     } catch (FileNotFoundException ex) {
                         System.out.println("Exception while writing");
                     }
                 }
             }
-//
+
 
             if (!file.delete()) {
                 System.out.println("Could not delete file");
@@ -219,11 +231,14 @@ public class TaskManager {
 
             Files.move(from, to);
 
-        } catch (FileNotFoundException e) {
+        } catch (
+                FileNotFoundException e) {
             System.out.println("No such file found");
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public static void printMenu() {
